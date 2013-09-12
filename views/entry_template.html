@@ -1,0 +1,48 @@
+<!doctype HTML>
+<html
+	<head>
+		<title>
+			Listing
+		</title>
+		<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	</head>
+<body>
+
+	<div class="row" style="background-image: url(http://www.wallsave.com/wallpapers/1920x1080/texrura-metal/1605475/texrura-metal-ios-linen-texture-grey-by-vegardhw-on-deviantart-1605475.jpg)">		
+    	<span class="span2" style="padding-left: 20px">
+    		<h1 style="color:white;">Dryve</h1>
+   		</span>
+
+		{% if username %}
+			<div class="span6 offset6">
+				<p></p>
+				<a href="/newcar" class="btn btn-primary">List a Car!</a>
+				<span style="color: #DDD4D4">&nbsp&nbsp&nbsp Welcome {{username}}!</span>
+				<a href="/logout">&nbsp&nbsp&nbspLogout |</a>
+				<a href="/">My Dashboard</a>
+				<p></p>
+			</div>
+		{% else %}
+			<p></p>
+			<div class="span5 offset8" style="color: #D1D0CE">
+			You are not logged in!        <a href="/login">Login</a> | <a href="/signup">Sign Up</a></div>
+			<p></p>
+		{% endif %}
+		</div>
+	</div>
+
+
+<h2>{{car['name']}}</h2>
+Posted {{post['date']}}<i> By {{post['author']}}</i><br>
+<hr>
+{% autoescape false %}
+{{post['body']}}
+{% endautoescape %}
+<p>
+
+
+<hr>
+</body>
+</html>
+
+

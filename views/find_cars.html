@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+	<head>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+		<title>Dryve.me</title>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    	<style type="text/css">
+      		html { height: 100% }
+      		body { height: 100%; margin: 0; padding: 0 }
+      		#map-canvas { }
+    	</style>
+    
+    	<script type="text/javascript"
+      		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwehTkiWGttVWmKbBYm-V0Lj1UvWCyzXg&sensor=false">
+    	</script>
+    
+
+	</head>
+
+	
+	<body onload="initialize()">
+
+	<div class="row" style="height:70px; vertical-align:middle; background-image: url(http://www.wallsave.com/wallpapers/1920x1080/texrura-metal/1605475/texrura-metal-ios-linen-texture-grey-by-vegardhw-on-deviantart-1605475.jpg)">	
+    <div class="span2" style="padding-left: 20px">
+        <a href="/" style="text-decoration:none">
+          <p style="color:white; font-family:'Fugaz One', cursive; line-height: 70px; font-size: 50px">Dryve.me</p>
+        </a>
+    </div>
+		{% if username %}	
+      <span class="span5" style="padding-left:450px; line-height:70px">
+          <a href="/newcar" class="btn btn-primary">List a Car!</a>
+  			  <span style="color: #DDD4D4; font-size:16px;">&nbsp&nbsp&nbsp Welcome {{username}}!</span>
+  			  <a href="/logout" style="font-size:16px;">&nbsp&nbsp&nbspLogout</a>
+			</span>
+		{% else %}
+			<span class="span5" style="color: #D1D0CE; padding-left:450px; line-height:70px; font-size:16px;">
+				You are not logged in!        <a href="/login">Login</a> | <a href="/signup">Sign Up</a>
+			</span>
+			{% endif %}
+	</div>
+
+  <p></p>
+	<div class="span4 offset5"><h1>My Dashboard</h1></div>
+</div>
+
+<script type="text/javascript">
+  var geocoder;
+  var map;
+  function initialize() {
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(37, -122);
+    var mapOptions = {
+      zoom: 8,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  }
+
+  function codeAddress() {
+    var address = document.getElementById("address").value;
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+
+        //TODO
+        for (var car in mycars) {
+          if (car['street'] + car['city'] + car['state'] + car['zip'] == address) {
+
+          }
+        }
+
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
+  }
+</script>
+
+<div id="map-canvas" style="width: 800px; height: 600px; margin: auto"></div>
+  <div class="span5 offset8">
+    <input id="address" type="textbox" value="Sammamish, WA">
+    <input type="button" value="Find Cars" onclick="codeAddress()">
+  </div>
+
+{% for car in mycars %}
+	<div class="span8 offset1">
+  <h3>
+		<a href="/car/{{car['permalink']}}">{{car['name']}}</a>
+		<p> {{car['year']}} {{car['make']}} {{car['model']}}</p>
+	</h3>
+	<p>
+		Posted {{car['date']}} 
+	</p>
+	<p>
+		At <i>{{car['street']}} {{car['city']}} {{car['state']}} {{car['zip']}}</i>
+	</p>
+	
+	{% autoescape false %}
+	<p>This car costs ${{car['pricePerHr']}} per hour</p>
+  <hr>
+</div>
+	{% endautoescape %}
+{% endfor %}
+
+	</body>
+</html>
+
+

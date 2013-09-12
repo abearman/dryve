@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  	<link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+    <title>Sign Up</title>
+  </head>
+
+  <body>
+  	<div class="row" style="height:70px; vertical-align:middle; background-image: url(http://www.wallsave.com/wallpapers/1920x1080/texrura-metal/1605475/texrura-metal-ios-linen-texture-grey-by-vegardhw-on-deviantart-1605475.jpg)">	
+	    <div class="span2" style="padding-left: 20px">
+	        <a href="/" style="text-decoration:none">
+	        	<p style="color:white; font-family:'Fugaz One', cursive; line-height: 70px; font-size: 50px">Dryve.me</p>
+	        </a>
+	    </div>
+	</div>
+
+	<div class="span5 offset1" style="padding-top:20px">	
+	    Already a user? <a href="/login">Login</a>
+	    <h2>Signup</h2>
+	    <form method="post">
+	      <table>
+	        <tr>
+	          <td class="label">
+	            Username
+	          </td>
+	          <td>
+	            <input type="text" name="username" value="{{username}}">
+	          </td>
+	          <td class="error">
+		    {{username_error}}
+	            
+	          </td>
+	        </tr>
+
+	        <tr>
+	          <td class="label">
+	            Password
+	          </td>
+	          <td>
+	            <input type="password" name="password" value="">
+	          </td>
+	          <td class="error">
+		    {{password_error}}
+	            
+	          </td>
+	        </tr>
+
+	        <tr>
+	          <td class="label">
+	            Verify Password
+	          </td>
+	          <td>
+	            <input type="password" name="verify" value="">
+	          </td>
+	          <td class="error">
+		    {{verify_error}}
+	            
+	          </td>
+	        </tr>
+
+	        <tr>
+	          <td class="label">
+	            Email 
+	          </td>
+	          <td>
+	            <input type="text" name="email" value="{{email}}">
+	          </td>
+	          <td class="error">
+		    {{email_error}}
+
+		    <tr>
+	          <td class="label">
+	            Street Address 
+	          </td>
+	          <td>
+	            <input type="text" name="street" value="{{street}}">
+	          </td>
+	          <td class="error">
+		    {{street_error}}
+
+		    <tr>
+	          <td class="label">
+	            City
+	          </td>
+	          <td>
+	            <input type="text" name="city" value="{{city}}">
+	          </td>
+	          <td class="error">
+		    {{city_error}}
+
+		    <tr>
+	          <td class="label">
+	            State
+	          </td>
+	          <td>
+	          	<select name="state" value="{{state}}">
+	    			<option>Alabama</option>
+	  				<option>Alaska</option>
+	  				<option>Arizona</option>
+	  				<option>Arkansas</option>
+	  				<option>California</option>
+	  				<option>Colorado</option>
+	  				<option>Connecticut</option>
+	  				<option>Delaware</option>
+	  				<option>Florida</option>
+	  				<option>Georgia</option>
+	  				<option>Hawaii</option>
+	  				<option>Idaho</option>
+	  				<option>Illinois</option>
+	  				<option>Indiana</option>
+	  				<option>Iowa</option>
+	  				<option>Kansas</option>
+	  				<option>Kentucky</option>
+	  				<option>Louisiana</option>
+	  				<option>Maine</option>
+	  				<option>Maryland</option>
+	  				<option>Massachusetts</option>
+	  				<option>Michigan</option>
+	  				<option>Minnesota</option>
+	  				<option>Mississippi</option>
+	  				<option>Missouri</option>
+	  				<option>Montana</option>
+	  				<option>Nebraska</option>
+	  				<option>Nevada</option>
+	  				<option>New Hampshire</option>
+	  				<option>New Jersey</option>
+	  				<option>New Mexico</option>
+	  				<option>New York</option>
+	  				<option>North Carolina</option>	
+	  				<option>North Dakota</option>
+	  				<option>Ohio</option>
+	  				<option>Oklahoma</option>
+	  				<option>Oregon</option>
+	  				<option>Pennsylvania</option>
+	  				<option>Rhode Island</option>	
+	  				<option>South Carolina</option>
+	  				<option>South Dakota</option>
+	  				<option>Tennessee</option>
+	  				<option>Texas</option>
+	  				<option>Utah</option>
+	  				<option>Vermont</option>
+	  				<option>Virginia</option>
+	  				<option>Washington</option>
+	  				<option>West Virginia</option>
+	  				<option>Wisconsin</option>
+	  				<option>Wyoming</option>
+	  			</select>
+	          </td>
+	          <td class="error">
+		    {{state_error}}
+	          </td>
+	        </tr>
+
+	        <tr>
+	          <td class="label">
+	            Zip Code
+	          </td>
+	          <td>
+	            <input type="text" name="zip" value="{{zip}}">
+	          </td>
+	          <td class="error">
+		    {{zip_error}}
+
+	      </table>
+
+	      <input type="submit">
+	    </form>
+	</div>
+
+  </body>
+
+</html>
