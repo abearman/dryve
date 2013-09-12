@@ -1,5 +1,5 @@
-var UsersDAO = require('../users').UsersDAO
-  , SessionsDAO = require('../sessions').SessionsDAO;
+var UsersDAO = require('../controllers/users').UsersDAO
+  , SessionsDAO = require('../controllers/sessions').SessionsDAO;
 
 /* The SessionHandler must be constructed with a connected db */
 function SessionHandler (db) {

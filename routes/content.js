@@ -1,4 +1,4 @@
-var CarsDAO = require('../cars').CarsDAO;
+var CarsDAO = require('../controllers/cars').CarsDAO;
 var sanitize = require('validator').sanitize; // Helper to sanitize form input
 
 /* The ContentHandler must be constructed with a connected db */
