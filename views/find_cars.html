@@ -42,9 +42,20 @@
 			{% endif %}
 	</div>
 
-  <p></p>
-	<div class="span4 offset5"><h1>My Dashboard</h1></div>
-</div>
+  <div> 
+    <form class="form-horizontal" action="/newcar" method="POST" style="height:15px; padding-top: 5px;">
+    {{errors}}
+      <div class="control-group">
+        <div class="controls">
+          <input id="address" type="text" placeholder="I am here" value="{{here}}">
+          <input type="text" name="there" placeholder="I want to go there" value="{{name}}">
+          <input type="button" value="Find Cars" onclick="codeAddress()" class="btn btn-success">
+        </div>
+      </div>
+    </form>
+
+   <div id="map-canvas" style="width: 700px; height: 450px; margin: auto; padding-top: 0px;"></div>
+  </div>
 
 <script type="text/javascript">
   var geocoder;
@@ -67,7 +78,7 @@
       if (status == google.maps.GeocoderStatus.OK) {
         map.setCenter(results[0].geometry.location);
         mapCars();
-        reorderCarsList();
+        reorderCarsList(address);
       } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
@@ -90,27 +101,30 @@
     {% endfor %}
   }
 
-  function reorderCarsList() {
+  //TODO later
+  function reorderCarsList(userAddress) {
+    var userLatitude;
+    var userLongitude;
+    geocoder.getLatLng(userAddress, function(point) {
+      userLatitude = point.y;
+      userLongitude = point.x;
+    });
+
     var carsArray;
     {% for car in mycars %}
       var carAddress = "{{car['street']}} {{car['city']}} {{car['state']}} {{car['zip']}}";
-      geocoder.geocode({'address': carAddress}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-          
-        } else {
-          alert("Geocode was not successful for the following reason: " + status);
-        }
+      geocoder.getLatLng(carAddress, function(point) {
+        var carLatitude = point.y;
+        var carLongitude = point.x;
+
+        var distance = Math.sqrt(Math.pow((carLongitude - userLongitude), 2) + 
+          Math.pow((carLatitude - userLatitude), 2));
+
       });
     {% endfor %}
   }
 
 </script>
-
-<div id="map-canvas" style="width: 800px; height: 600px; margin: auto"></div>
-  <div class="span5 offset8">
-    <input id="address" type="textbox" value="Seattle, WA">
-    <input type="button" value="Find Cars" onclick="codeAddress()">
-  </div>
 
 {% for car in mycars %}
 
