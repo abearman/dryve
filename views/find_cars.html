@@ -47,7 +47,6 @@
 </div>
 
 <script type="text/javascript">
-  var carsAddresses = "{{mycars[0]['street']}}";
   var geocoder;
   var map;
 
@@ -68,7 +67,7 @@
       if (status == google.maps.GeocoderStatus.OK) {
         map.setCenter(results[0].geometry.location);
         mapCars();
-
+        reorderCarsList();
       } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
@@ -84,6 +83,20 @@
             map: map,
             position: results[0].geometry.location
           });
+        } else {
+          alert("Geocode was not successful for the following reason: " + status);
+        }
+      });
+    {% endfor %}
+  }
+
+  function reorderCarsList() {
+    var carsArray;
+    {% for car in mycars %}
+      var carAddress = "{{car['street']}} {{car['city']}} {{car['state']}} {{car['zip']}}";
+      geocoder.geocode({'address': carAddress}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          
         } else {
           alert("Geocode was not successful for the following reason: " + status);
         }
