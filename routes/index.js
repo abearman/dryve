@@ -13,7 +13,7 @@ module.exports = exports = function(app, db) {
     // The main page of the blog
     app.get('/', contentHandler.displayMainPage);
 
-    //The find cars page 
+    //The find page 
     app.get('/find_cars', contentHandler.displayCarsPage);
 
     // A single car, which can be commented on
@@ -30,9 +30,6 @@ module.exports = exports = function(app, db) {
 
     // Logout page
     app.get('/logout', sessionHandler.displayLogoutPage);
-
-    // Welcome page
-    app.get("/welcome", sessionHandler.displayWelcomePage);
 
     // Signup form
     app.get('/signup', sessionHandler.displaySignupPage);

@@ -20,14 +20,14 @@ function ContentHandler (db) {
 
         cars.getCars(function(err, results) {
             "use strict";
-
             if (err) return next(err);
 
             return res.render('find_cars', {
                 title: 'blog homepage',
                 username: req.username,
-                mycars: results
+                mycars: results,
             });
+
         });
     }
 
