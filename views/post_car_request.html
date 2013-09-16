@@ -1,0 +1,42 @@
+<!doctype HTML>
+<html>
+<head>
+	<title>List a new car</title>
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+	<link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+	<div class="row" style="height:70px; vertical-align:middle; background-image: url(http://www.wallsave.com/wallpapers/1920x1080/texrura-metal/1605475/texrura-metal-ios-linen-texture-grey-by-vegardhw-on-deviantart-1605475.jpg)">	
+	    <div class="span2" style="padding-left: 20px">
+	        <a href="/" style="text-decoration:none">
+	        	<p style="color:white; font-family:'Fugaz One', cursive; line-height: 70px; font-size: 50px">Dryve.me</p>
+	        </a>
+	    </div>
+		{% if username %}	
+	      <span class="span5" style="padding-left:450px; line-height:70px">
+	  		<span style="color: #DDD4D4; font-size:16px;">
+	  			&nbsp&nbsp&nbsp Welcome {{username}}!
+	  			<a href="/logout">&nbsp&nbspLogout | </a>
+	  			<a href="/find_cars">Find Cars</a>
+	  		</span>
+		  </span>
+		{% else %}
+			<span class="span5" style="color: #D1D0CE; padding-left:450px; line-height:70px">
+				You are not logged in!        <a href="/login">Login</a> | <a href="/signup">Sign Up</a>
+				Go to <a href="/find_cars">Find Cars</a>
+			</span>
+		{% endif %}
+	</div>
+	<p></p>
+
+	<div class="well span6 offset1">
+		<h3>Thanks for requesting a car!</h3>
+		<h3 style="color:#848482">Have a nice trip.</h3>
+	</div>
+
+
+

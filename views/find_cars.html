@@ -3,6 +3,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
 	<head>
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  
+    <script>
+      var currCar;
+      // SHOW POP-OVER
+      function showPopOver(divID, carName) {
+        // SET THE DIV POSITION
+        currCar = carName;
+        document.getElementById(divID).style.left = "200px";
+        document.getElementById(divID).style.top = "200px";
+
+        // SHOW THE DIV
+        document.getElementById(divID).style.display = "block";
+      }
+
+      // CLOSE POP-OVER
+      function closePopOver(divID) {
+        // HIDE THE DIV
+        document.getElementById(divID).style.display = "none";
+      }
+    </script>
 
     <link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
 		<title>Dryve.me</title>
@@ -11,6 +31,13 @@
       		html { height: 100% }
       		body { height: 100%; margin: 0; padding: 0 }
       		#map-canvas { }
+          .popover {
+            height: 150px;
+            width: 300px;
+            background-color: black;
+            color: #DDD4D4;
+            padding: 20px;
+          }
     	</style>
     
     	<script type="text/javascript"
@@ -54,6 +81,16 @@
       </div>
     </form>
 
+    <!-- POPOVER -->
+    <div id="pop1" class="popover" align="center">
+      <div style="position:absolute;right:0px;top:0px"><a class="btn" href="javascript:closePopOver('pop1');"><i class="icon-remove"></i></a></div>
+      <div>
+        <h1><a href="/" style="text-decoration:none;color:white">Would you like to <span style="font-family:'Fugaz One', cursive; font-weight:normal">Dryve</span> this car?</a></h1>
+        <a href="/car_request" class="btn btn-primary btn-large"; style="position:absolute;right:10px;bottom:10px">Yes!</a>
+      </div>
+    </div>
+    <!-- End popover-->
+
    <div id="map-canvas" style="width: 700px; height: 450px; margin: auto; padding-top: 0px;"></div>
   </div>
 
@@ -94,6 +131,12 @@
             map: map,
             position: results[0].geometry.location
           });
+
+          google.maps.event.addListener(marker, 'click', function() {
+            map.setCenter(marker.getPosition());
+            showPopOver('pop1', "{{car['name']}}");
+          });
+
         } else {
           alert("Geocode was not successful for the following reason: " + status);
         }

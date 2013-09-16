@@ -16,6 +16,13 @@ module.exports = exports = function(app, db) {
     //The find page 
     app.get('/find_cars', contentHandler.displayCarsPage);
 
+    //The car request page
+    app.get('/car_request', contentHandler.displayCarRequestPage);
+    app.post('/car_request', contentHandler.handleCarRequest);
+
+    //The post car request page
+    app.get('/post_car_request', contentHandler.displayPostCarRequestPage);
+
     // A single car, which can be commented on
     app.get("/car/:permalink", contentHandler.displayCarByPermalink);
     app.get("/car_not_found", contentHandler.displayCarNotFound);

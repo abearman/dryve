@@ -1,4 +1,5 @@
 var CarsDAO = require('../controllers/cars').CarsDAO;
+var UsersDAO = require('../controllers/users').UsersDAO;
 var sanitize = require('validator').sanitize; // Helper to sanitize form input
 
 /* The ContentHandler must be constructed with a connected db */
@@ -6,6 +7,7 @@ function ContentHandler (db) {
     "use strict";
 
     var cars = new CarsDAO(db);
+    var users = new UsersDAO(db);
 
     this.displayMainPage = function(req, res, next) {
         "use strict";
@@ -28,6 +30,41 @@ function ContentHandler (db) {
                 mycars: results,
             });
 
+        });
+    }
+
+    this.displayCarRequestPage = function(req, res, next) {
+        "use strict";
+        res.render('car_request', {
+            title: 'car request',
+            username: req.username
+        });
+    }
+
+    this.handleCarRequest = function(req, res, next) {
+        "use strict";
+
+        var username = req.username;
+        var location = req.body.location;
+        var destination = req.body.destination;
+        var time = req.body.time;
+
+        if (!req.username) return res.redirect("/signup");
+
+        users.addRequest(username, location, destination, time, function(err, permalink) {
+            "use strict";
+
+            if (err) return next(err);
+
+            return res.redirect("/post_car_request");
+        });
+    }
+
+    this.displayPostCarRequestPage = function(req, res, next) {
+        "use strict";
+        res.render('post_car_request', {
+            title: 'post car request',
+            username: req.username
         });
     }
 

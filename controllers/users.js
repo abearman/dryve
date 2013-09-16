@@ -13,6 +13,17 @@ function UsersDAO(db) {
 
     var users = db.collection("users");
 
+    this.addRequest = function(username, location, destination, time, callback) {
+        "use strict";
+        users.update({'_id': username}, {'$set': {'location': location, 'destination': destination, 'time': time}}, function (err, result) {
+            if (!err) {
+                console.log("Inserted car request");
+                return callback(null, result[0]);
+            }
+            return callback(err, null);
+        });
+    }
+
     this.addUser = function(username, password, email, street, city, state, zip, callback) {
         "use strict";
 
