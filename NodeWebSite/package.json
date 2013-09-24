@@ -4,6 +4,7 @@
   "description": "Blog Project for M101JS",
   "main": "app.js",
   "dependencies": {
+    "bunyan": "~0.21.4",
     "bcrypt-nodejs": "~0.0.3",
     "consolidate": "~0.9.1",
     "express": ">=3.x",

@@ -1,3 +1,5 @@
+var logger = require('../logger/logger');
+var config = require('../config/config');
 var SessionHandler = require('./session');
 var ContentHandler = require('./content');
 var ErrorHandler = require('./error').errorHandler;

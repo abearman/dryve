@@ -1,3 +1,5 @@
+var config = require('../config/config');
+var logger = require('../logger/logger');
 var bcrypt = require('bcrypt-nodejs');
 
 /* The UsersDAO must be constructed with a connected database object */
@@ -7,7 +9,7 @@ function UsersDAO(db) {
     /* If this constructor is called without the "new" operator, "this" points
      * to the global object. Log a warning and call it correctly. */
     if (false === (this instanceof UsersDAO)) {
-        console.log('Warning: UsersDAO constructor called without "new" operator');
+        logger.bunyanLogger().info("%sWarning: UsersDAO constructor called without 'new' operator", config.TAG);
         return new UsersDAO(db);
     }
 
@@ -17,7 +19,7 @@ function UsersDAO(db) {
         "use strict";
         users.update({'_id': username}, {'$set': {'location': location, 'destination': destination, 'time': time}}, function (err, result) {
             if (!err) {
-                console.log("Inserted car request");
+                logger.bunyanLogger().info("%sInserted car request", config.TAG);
                 return callback(null, result[0]);
             }
             return callback(err, null);
@@ -46,7 +48,7 @@ function UsersDAO(db) {
             "use strict";
 
             if (!err) {
-                console.log("Inserted new user");
+                logger.bunyanLogger().info("%sInserted new user", config.TAG);
                 return callback(null, result[0]);
             }
 

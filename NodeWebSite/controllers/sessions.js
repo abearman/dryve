@@ -1,3 +1,5 @@
+var config = require('../config/config');
+var logger = require('../logger/logger');
 var crypto = require('crypto');
 
 /* The SessionsDAO must be constructed with a connected database object */
@@ -7,7 +9,7 @@ function SessionsDAO(db) {
     /* If this constructor is called without the "new" operator, "this" points
      * to the global object. Log a warning and call it correctly. */
     if (false === (this instanceof SessionsDAO)) {
-        console.log('Warning: SessionsDAO constructor called without "new" operator');
+        logger.bunyanLogger().info("%sWarning: SessionsDAO constructor called without 'new' operator", config.TAG);
         return new SessionsDAO(db);
     }
 

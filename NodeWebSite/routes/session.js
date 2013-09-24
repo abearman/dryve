@@ -1,3 +1,5 @@
+var logger = require('../logger/logger');
+var config = require('../config/config');
 var UsersDAO = require('../controllers/users').UsersDAO
   , SessionsDAO = require('../controllers/sessions').SessionsDAO;
 
@@ -31,7 +33,7 @@ function SessionHandler (db) {
         var username = req.body.username;
         var password = req.body.password;
 
-        console.log("user submitted username: " + username + " pass: " + password);
+        logger.bunyanLogger().info("%suser submitted username: %s pass: %s", config.TAG, username, password);
 
         users.validateLogin(username, password, function(err, user) {
             "use strict";
@@ -155,7 +157,7 @@ function SessionHandler (db) {
             });
         }
         else {
-            console.log("user did not validate");
+            logger.bunyanLogger().info("%suser did not validate", config.TAG);
             return res.render("signup", errors);
         }
     }
@@ -164,7 +166,7 @@ function SessionHandler (db) {
         "use strict";
 
         if (!req.username) {
-            console.log("welcome: can't identify user...redirecting to signup");
+            logger.bunyanLogger().info("%swelcome: can't identify user...redirecting to signup", config.TAG);
             return res.redirect("/signup");
         }
 

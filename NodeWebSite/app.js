@@ -1,9 +1,13 @@
 //Comment
+var config = require('./config/config');
+var logger = require('./logger/logger');
 var express = require('express');
 var app = express(); // Web framework to handle routing requests
 var cons = require('consolidate'); // Templating library adapter for Express
 var MongoClient = require('mongodb').MongoClient; // Driver for connecting to MongoDB
 var routes = require('./routes'); // Routes for our application
+
+logger.bunyanLogger().info("%s***** Starting dryve web application *****", config.TAG);
 
 MongoClient.connect('mongodb://localhost:27017/cars', function(err, db) {
     "use strict";
@@ -27,5 +31,5 @@ MongoClient.connect('mongodb://localhost:27017/cars', function(err, db) {
     routes(app, db);
 
     app.listen(3000);
-    console.log('Express server listening on port 3000');
+    logger.bunyanLogger().info("%sExpress server listening on port 3000", config.TAG);
 });

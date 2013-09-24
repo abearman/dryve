@@ -1,3 +1,5 @@
+var logger = require('../logger/logger');
+var config = require('../config/config');
 var CarsDAO = require('../controllers/cars').CarsDAO;
 var UsersDAO = require('../controllers/users').UsersDAO;
 var sanitize = require('validator').sanitize; // Helper to sanitize form input

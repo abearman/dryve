@@ -1,3 +1,6 @@
+var config = require('../config/config');
+var logger = require('../logger/logger');
+
 /* The PostsDAO must be constructed with a connected database object */
 function CarsDAO(db) {
     "use strict";
@@ -5,7 +8,7 @@ function CarsDAO(db) {
     /* If this constructor is called without the "new" operator, "this" points
      * to the global object. Log a warning and call it correctly. */
     if (false === (this instanceof CarsDAO)) {
-        console.log('Warning: CarsDAO constructor called without "new" operator');
+        logger.bunyanLogger().info("%sWarning: CarsDAO constructor called without 'new' operator", config.TAG);
         return new CarsDAO(db);
     }
 
@@ -13,7 +16,7 @@ function CarsDAO(db) {
 
     this.insertEntry = function (name, make, model, year, pricePerHr, pricePerDay, street, city, state, zip, callback) {
         "use strict";
-        console.log("inserting vehicle entry" + name);
+        logger.bunyanLogger().info("%sinserting vehicle entry: %s", config.TAG, name);
 
         // fix up the permalink to not include whitespace
         var permalink = name.replace( /\s/g, '_' );
@@ -42,7 +45,7 @@ function CarsDAO(db) {
 
             if (err) return callback(err, null);
 
-            console.log("Inserted new car");
+            logger.bunyanLogger().info("%sInserted new car", config.TAG);
             callback(err, permalink);
         });
     }
@@ -60,7 +63,7 @@ function CarsDAO(db) {
         cars.find().sort('date', -1).toArray(function(err, items) {
             "use strict";
             if (err) return callback(err, null);
-            console.log("Found " + items.length + " cars");
+            logger.bunyanLogger().info("%sFound %d cars", config.TAG, items.length);
             callback(err, items);
         });
     }
