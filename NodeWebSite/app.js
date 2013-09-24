@@ -9,8 +9,9 @@ var routes = require('./routes'); // Routes for our application
 
 logger.bunyanLogger().info("%s***** Starting dryve web application *****", config.TAG);
 
-MongoClient.connect('mongodb://localhost:27017/cars', function(err, db) {
+MongoClient.connect(config.connectionString, function(err, db) {
     "use strict";
+    logger.bunyanLogger().info("%sMongoClient connection attempt: %s", config.TAG, err == null ? "SUCCESS" : err.toString());
     if(err) throw err;
 
     // Register our templating engine
@@ -31,5 +32,5 @@ MongoClient.connect('mongodb://localhost:27017/cars', function(err, db) {
     routes(app, db);
 
     app.listen(3000);
-    logger.bunyanLogger().info("%sExpress server listening on port 3000", config.TAG);
+    logger.bunyanLogger().info("%sExpress server listening on port 3000. Environment: %s", config.TAG, config.environment);
 });

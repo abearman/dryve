@@ -6,7 +6,7 @@ var _env = process.env.NODE_ENV || 'development';
 // Configuration
 //
 var _mongoBaseUrl;
-var _databaseName = 'dryve';
+var _databaseName = 'dryvedb';
 var _usesHttps = false;
 var _TAG = "DRYVE: ";
 var _pingerTimeoutSeconds = 45;
@@ -17,7 +17,7 @@ if ('development' === _env) {
 }
 if ('production' === _env) {
     // Note: The templated user/password below are replaced as part of the build system
-    _mongoBaseUrl = 'mongodb://{{MONGO_USER}}:{{MONGO_PASSWORD}}@ds045097.mongolab.com:45097/';
+    _mongoBaseUrl = 'mongodb://{{MONGO_USER}}:{{MONGO_PASSWORD}}@ds043957.mongolab.com:43957/';
 }
 
 //
