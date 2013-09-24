@@ -22,5 +22,5 @@
       "dryve.me",
       "www.dryve.me"
   ],
-  "subdomains": "dryve"
+  "subdomain": "dryve"
 }
